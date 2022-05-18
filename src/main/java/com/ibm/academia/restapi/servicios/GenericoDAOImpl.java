@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-public class GenericoDAOImpl <Entidad, R extends CrudRepository<Entidad, Integer>> implements GenericoDAO<Entidad>
+public class GenericoDAOImpl <Entidad, R extends CrudRepository<Entidad, Long>> implements GenericoDAO<Entidad>
 {
 
 	protected final R repository;   //crear repositorio, con constructor para poder usar el objeto repository
@@ -18,7 +18,7 @@ public class GenericoDAOImpl <Entidad, R extends CrudRepository<Entidad, Integer
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Entidad> buscarPorId(Integer id)
+	public Optional<Entidad> buscarPorId(Long id)
 	{
 		return repository.findById(id);
 	}
@@ -38,7 +38,7 @@ public class GenericoDAOImpl <Entidad, R extends CrudRepository<Entidad, Integer
 	}
 
 	@Override
-	public void eliminar(Integer id)
+	public void eliminar(Long id)
 	{
 		repository.deleteById(id);
 	}

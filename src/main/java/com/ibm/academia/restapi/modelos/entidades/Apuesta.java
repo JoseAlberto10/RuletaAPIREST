@@ -2,7 +2,6 @@ package com.ibm.academia.restapi.modelos.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -21,6 +20,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ibm.academia.restapi.enums.Color;
@@ -41,7 +41,7 @@ public class Apuesta implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     @Column(name = "apuesta_color")
     @Enumerated(EnumType.STRING)
@@ -52,8 +52,8 @@ public class Apuesta implements Serializable
     @Column(name = "apuesta_numero")
     private Integer apuestaNumero;
 
-    @DecimalMin(value = "1"    ,message = "Monto permitido para apostar: 1 a 10000 dolares")
-    @DecimalMax(value = "10000",message = "Monto permitido para apostar: 1 a 10000 dolares")
+    @Positive(message = "El monto para apostar debe ser un dolar o mas")
+    @DecimalMax(value = "10000",message = "Monto maximo permitido para apostar: 10000 dolares")
     @Column(name = "apuesta_dinero")
     private Integer apuestaDinero;
 
@@ -65,7 +65,7 @@ public class Apuesta implements Serializable
 
     @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "ruleta_id", foreignKey = @ForeignKey (name = "FK_RULETA_ID"))
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "apuestas"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","apuestas"})
     private Ruleta ruleta;
 
     

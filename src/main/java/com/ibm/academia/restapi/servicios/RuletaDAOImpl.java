@@ -19,6 +19,7 @@ public class RuletaDAOImpl extends GenericoDAOImpl<Ruleta, RuletaRepository> imp
 		super(repository);
 	}
 
+	
 	@Override
 	public Boolean abrirRuleta(Ruleta ruleta)
 	{
@@ -28,9 +29,9 @@ public class RuletaDAOImpl extends GenericoDAOImpl<Ruleta, RuletaRepository> imp
 	}
 
 	@Override
-	public Integer guardarRuleta(Ruleta ruleta)
+	public Long guardarRuleta(Ruleta ruleta)
 	{
-		Integer ruletaId = repository.save(ruleta).getId();
+		Long ruletaId = repository.save(ruleta).getId();
 		return ruletaId;
 	}
 

@@ -34,7 +34,7 @@ public class Ruleta implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "ruleta_abierta")
     private Boolean estaAbierta;
@@ -45,13 +45,12 @@ public class Ruleta implements Serializable
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion; 
 
-    @ToString.Exclude
     @OneToMany(mappedBy  = "ruleta", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "ruleta"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","ruleta"})
     private List<Apuesta> apuestas;
     
     
-	public Ruleta(Integer id, Boolean estaAbierta, List<Apuesta> apuestas)
+	public Ruleta(Long id, Boolean estaAbierta, List<Apuesta> apuestas)
 	{
 		this.id = id;
 		this.estaAbierta = estaAbierta;
